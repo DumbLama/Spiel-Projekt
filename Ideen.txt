@@ -1,0 +1,27 @@
+------------Rollenspiel 
+-Kämpfe : Wichtig
+-Rüstung : Wichtig
+-Orte : Wichtig
+-Pokemon ähnlich : Wichtig
+-Runden basierte Kämpfe : Wichtig
+-Pixel Welt : Wichtig
+-Energie
+-Level Orte
+-Reittiere
+-Verscheidene Klassen
+-Attribute
+-Level
+-Quests
+-Bosse
+-Inventory (Rucksack)
+-Rätsel
+-Spells, Attacken
+-Pets
+-Sammeln
+-Crates
+-Dungeons
+-Rüstungs Wert
+-Money
+-Runen
+-Masterys (Skills)
+-SPielstand speichern
