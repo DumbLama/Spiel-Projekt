@@ -22,6 +22,7 @@ Kämpfer2pic = pg.image.load('Sprites12.png')
 Kämpfer2x = 50
 Kämpfer2y = 567
 Arenapic = pg.transform.scale(Arenapic, (1000, 700))
+direction = "right1"
 
 
 while True: # main game loop
@@ -31,6 +32,27 @@ while True: # main game loop
             sys.exit()
 
     DISPLAYSURF.blit(Arenapic,(Arenax, Arenay))
+
+    if direction == "right1":
+        Kämpfer1x += -5
+        if Kämpfer1x <=  860:
+            direction = "down1"
+    elif direction == "down1":
+        Kämpfer1y += 3
+        Kämpfer1x += -3
+        if Kämpfer1y >= 601:
+            direction = "right2"
+    elif direction == "right2":
+        Kämpfer1x += -5
+        if Kämpfer1x <=  135:
+            direction = "up1"
+    elif direction == "up1":
+        Kämpfer1y -= 3
+        Kämpfer1x -= +3
+        if Kämpfer1y <= 559:
+            direction = ("up2")
+        
+            
     DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
     DISPLAYSURF.blit(Kämpfer2pic,(Kämpfer2x, Kämpfer2y))
 
