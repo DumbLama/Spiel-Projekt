@@ -1,4 +1,4 @@
-------------Rollenspiel 
+﻿------------Rollenspiel 
 -Kämpfe : Wichtig
 -Rüstung : Wichtig
 -Orte : Wichtig
@@ -25,3 +25,4 @@
 -Runen
 -Masterys (Skills)
 -SPielstand speichern
+-Ausweichen (tastenkombination/sequenz), wird angezeigt und man muss schnell die tasten drücken
