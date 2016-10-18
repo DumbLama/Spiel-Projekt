@@ -16,11 +16,14 @@ Arenapic = pg.image.load('Arena.png')
 Arenax = 0
 Arenay = 0
 Kämpfer1pic = pg.image.load('Sprites10.png')
-Kämpfer1x = 910
-Kämpfer1y = 559
+Kämpfer1pos = Kämpfer1pic.get_rect()
+Kämpfer1pos = Kämpfer1pos.move((910, 559))
+print(str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+
 Kämpfer2pic = pg.image.load('Sprites12.png')
-Kämpfer2x = 50
-Kämpfer2y = 567
+Kämpfer2pos = Kämpfer2pic.get_rect()
+Kämpfer2pos = Kämpfer2pos.move((50, 567))
+
 Arenapic = pg.transform.scale(Arenapic, (1000, 700))
 direction = "right1"
 key = pg.key.get_pressed()
@@ -28,6 +31,7 @@ action = ""
 
 
 
+<<<<<<< HEAD
 def get_action():
     return action
 
@@ -35,6 +39,8 @@ Rouge = Rouge(120, 50, "Rouge", 0, get_action)
 Zauberer = Magier(60, 30, "Zauberer", 2, get_action)
 Arena2 = Arena(Rouge, Zauberer)
 
+=======
+>>>>>>> parent of a497041... Figuren bewegen sich aufeinander zu
 while True: # main game loop
     for event in pg.event.get():
         if event.type == QUIT:
@@ -44,19 +50,28 @@ while True: # main game loop
          #   if event.state.
 
     DISPLAYSURF.blit(Arenapic,(Arenax, Arenay))
+<<<<<<< HEAD
     key = pg.key.get_pressed()
     #key = pg.key.get_pressed()
     action = ""
+=======
+
+    print(str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+
+    
+>>>>>>> parent of a497041... Figuren bewegen sich aufeinander zu
     if direction == "right1":
-        Kämpfer1x += -5
-        if Kämpfer1x <=  860:
+        print("a"+str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+        Kämpfer1pos = Kämpfer1pos.move(-5,0)
+        if Kämpfer1pos.left <=  860:
             direction = "down1"
     elif direction == "down1":
-        Kämpfer1y += 3
-        Kämpfer1x += -3
-        if Kämpfer1y >= 601:
+        print("b"+str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+        Kämpfer1pos = Kämpfer1pos.move(-3,3)
+        if Kämpfer1pos.top >= 601:
             direction = "right2"
     elif direction == "right2":
+<<<<<<< HEAD
         Kämpfer1x += -5
         if Kämpfer1x <=  525:
             direction = "left"
@@ -90,10 +105,19 @@ while True: # main game loop
     
     
     
+=======
+        Kämpfer1pos = Kämpfer1pos.move(-5,0)
+        if Kämpfer1pos.left <=  135:
+            direction = "up1"
+    elif direction == "up1":
+        Kämpfer1pos = Kämpfer1pos.move(-3,-3)
+        if Kämpfer1pos.top <= 559:
+            direction = ("up2")
+>>>>>>> parent of a497041... Figuren bewegen sich aufeinander zu
         
             
-    DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
-    DISPLAYSURF.blit(Kämpfer2pic,(Kämpfer2x, Kämpfer2y))
+    DISPLAYSURF.blit(Kämpfer1pic, Kämpfer1pos, Kämpfer1pos)
+    DISPLAYSURF.blit(Kämpfer2pic, Kämpfer2pos, Kämpfer2pos)
 
 
     pg.display.update()
