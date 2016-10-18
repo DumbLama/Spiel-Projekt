@@ -1,9 +1,10 @@
 class Kämpfer:
 
-    def __init__(self, healpoints, damage, name):
+    def __init__(self, healpoints, damage, name, get_action):
         self.healpoints = healpoints
         self.damage = damage
         self.name = name
+        self.get_action = get_action
 
     def attributes(self):
         return [self.healpoints, self.damage, self.name]
@@ -19,12 +20,13 @@ class Kämpfer:
 
 class Rouge(Kämpfer):
 
-    def __init__(self,healpoints, damage, name, energy):
+    def __init__(self,healpoints, damage, name, energy, get_action):
         self.healpoints = healpoints
         self.damage = damage
         self.name = name
         self.energy = energy
         self.invisible_flag = False
+        self.get_action = get_action
 
     def attributes(self):
         return [self.healpoints, self.damage, self.name, self.energy]
@@ -46,12 +48,12 @@ class Rouge(Kämpfer):
         if (self.energy >= 2):
             self.energy = self.energy - 2
             self.Auswahl = ""
-            while not(self.Auswahl in ["Invisible", "Damage"]):
+            if not(self.Auswahl in ["Invisible", "Damage"]):
                 if (not (self.Auswahl == "")):
                     print("Wrong Command")
-                self.Auswahl = input(self.name + ", Invisible or Damage?")
+                self.Auswahl = self.get_action()
                 
-            if (self.Auswahl == "Invisible"):
+            if (self.Auswahl == "Special"):
                 self.invisible_flag = True
                 print(self.name + " is now Invisible.")
                 
@@ -64,11 +66,12 @@ class Rouge(Kämpfer):
                 
 
 class Magier(Kämpfer):
-    def __init__(self, healpoints, damage, name, mana):
+    def __init__(self, healpoints, damage, name, mana, get_action):
         self.healpoints = healpoints
         self.damage = damage
         self.name = name
         self.mana = mana
+        self.get_action = get_action
 
     def attributes(self):
         return [self.healpoints, self.damage, self.name, self.mana]
@@ -80,12 +83,12 @@ class Magier(Kämpfer):
         if (self.mana >= 3):
             self.mana = self.mana - 3
             self.Auswahl = ""
-            while not(self.Auswahl in ["Regenerate", "Damage"]):
+            if not(self.Auswahl in ["Regenerate", "Damage"]):
                 if (not (self.Auswahl == "")):
                     print("Wrong Command")
-                self.Auswahl = input(self.name + ", Regenerate or Damage?")
+                self.Auswahl = self.get_action()
 
-            if (self.Auswahl == "Regenerate"):
+            if (self.Auswahl == "Special"):
                 self.healpoints = self.healpoints + 10
                 print(self.name + " hat Leben regeneriert, jetztige Leben: " + str(self.healpoints))
             elif (self.Auswahl == "Damage"):
@@ -94,9 +97,9 @@ class Magier(Kämpfer):
                 print(self.name + " blasts " + other.name + " for " + str(self.damage) + " damage!")
                 self.damage = self.damage - 3
                 
-        else:
-            other.get_damage(self.damage)
-            print("" + self.name + " hits " + other.name + " for " + str(self.damage) + " damage!")
+        #else:
+        #    other.get_damage(self.damage)
+        #    print("" + self.name + " hits " + other.name + " for " + str(self.damage) + " damage!")
             
 class Krieger(Kämpfer):
     def get_damage(self, damage):
@@ -110,10 +113,10 @@ class Krieger(Kämpfer):
 
     def fight(self, other):
         self.Auswahl = ""
-        while not(self.Auswahl in ["Block", "Damage"]):
+        if not(self.Auswahl in ["Block", "Damage"]):
             if (not (self.Auswahl == "")):
                 print("Wrong Command")
-            self.Auswahl = input(self.name + ", Block or Damage?")
+            self.Auswahl = self.get_action()
         if (self.Auswahl == "Block"):
             self.block_flag = True
             print(self.name + " uses their shield.")

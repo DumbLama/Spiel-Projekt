@@ -23,16 +23,30 @@ Kämpfer2x = 50
 Kämpfer2y = 567
 Arenapic = pg.transform.scale(Arenapic, (1000, 700))
 direction = "right1"
+key = pg.key.get_pressed()
+action = ""
 
+
+
+def get_action():
+    return action
+
+Rouge = Rouge(120, 50, "Rouge", 0, get_action)
+Zauberer = Magier(60, 30, "Zauberer", 2, get_action)
+Arena2 = Arena(Rouge, Zauberer)
 
 while True: # main game loop
     for event in pg.event.get():
         if event.type == QUIT:
             pg.quit()
             sys.exit()
+        #elif event.type == KEYDOWN:
+         #   if event.state.
 
     DISPLAYSURF.blit(Arenapic,(Arenax, Arenay))
-
+    key = pg.key.get_pressed()
+    #key = pg.key.get_pressed()
+    action = ""
     if direction == "right1":
         Kämpfer1x += -5
         if Kämpfer1x <=  860:
@@ -60,8 +74,22 @@ while True: # main game loop
     elif direction == "left2":
         Kämpfer2x += 5
         if Kämpfer2x >=  425:
-            direction = ""
+            direction = "fight"
 
+    
+    if key[pg.K_d] or  key[pg.K_s]:
+        if key[pg.K_d] and key[pg.K_s]:
+            pass
+        if key[pg.K_d]:
+            action = "Damage"
+        else:
+            action = "Special"
+
+    if direction == "fight":
+        Zauberer.fight(Rouge)
+    
+    
+    
         
             
     DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
