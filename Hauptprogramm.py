@@ -16,13 +16,17 @@ Arenapic = pg.image.load('Arena.png')
 Arenax = 0
 Arenay = 0
 Kämpfer1pic = pg.image.load('Sprites10.png')
-Kämpfer1x = 910
-Kämpfer1y = 559
+Kämpfer1pos = Kämpfer1pic.get_rect()
+Kämpfer1pos = Kämpfer1pos.move((910, 559))
+print(str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+
 Kämpfer2pic = pg.image.load('Sprites12.png')
-Kämpfer2x = 50
-Kämpfer2y = 567
+Kämpfer2pos = Kämpfer2pic.get_rect()
+Kämpfer2pos = Kämpfer2pos.move((50, 567))
+
 Arenapic = pg.transform.scale(Arenapic, (1000, 700))
 direction = "right1"
+
 
 
 while True: # main game loop
@@ -33,28 +37,31 @@ while True: # main game loop
 
     DISPLAYSURF.blit(Arenapic,(Arenax, Arenay))
 
+    print(str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+
+    
     if direction == "right1":
-        Kämpfer1x += -5
-        if Kämpfer1x <=  860:
+        print("a"+str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+        Kämpfer1pos = Kämpfer1pos.move(-5,0)
+        if Kämpfer1pos.left <=  860:
             direction = "down1"
     elif direction == "down1":
-        Kämpfer1y += 3
-        Kämpfer1x += -3
-        if Kämpfer1y >= 601:
+        print("b"+str(Kämpfer1pos.top) + str(Kämpfer1pos.right))
+        Kämpfer1pos = Kämpfer1pos.move(-3,3)
+        if Kämpfer1pos.top >= 601:
             direction = "right2"
     elif direction == "right2":
-        Kämpfer1x += -5
-        if Kämpfer1x <=  135:
+        Kämpfer1pos = Kämpfer1pos.move(-5,0)
+        if Kämpfer1pos.left <=  135:
             direction = "up1"
     elif direction == "up1":
-        Kämpfer1y -= 3
-        Kämpfer1x -= +3
-        if Kämpfer1y <= 559:
+        Kämpfer1pos = Kämpfer1pos.move(-3,-3)
+        if Kämpfer1pos.top <= 559:
             direction = ("up2")
         
             
-    DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
-    DISPLAYSURF.blit(Kämpfer2pic,(Kämpfer2x, Kämpfer2y))
+    DISPLAYSURF.blit(Kämpfer1pic, Kämpfer1pos, Kämpfer1pos)
+    DISPLAYSURF.blit(Kämpfer2pic, Kämpfer2pos, Kämpfer2pos)
 
 
     pg.display.update()
