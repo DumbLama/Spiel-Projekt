@@ -11,7 +11,7 @@ from pygame.locals import *
 pg.init()
 
 DISPLAYSURF = pg.display.set_mode((1000, 700))
-pg.display.set_caption('gfgfgfufffkkf')
+pg.display.set_caption('Kuhles Sbiel')
 Arenapic = pg.image.load('Arena.png')
 Arenax = 0
 Arenay = 0
@@ -76,18 +76,22 @@ while True: # main game loop
         if Kämpfer2x >=  425:
             direction = "fight"
 
-    
-    if key[pg.K_d] or  key[pg.K_s]:
-        if key[pg.K_d] and key[pg.K_s]:
-            pass
-        if key[pg.K_d]:
-            action = "Damage"
-        else:
-            action = "Special"
-
     if direction == "fight":
-        Zauberer.fight(Rouge)
+        Arena2.fight_to_death()
+        
+
     
+##    if key[pg.K_d] or  key[pg.K_s]:
+##        if key[pg.K_d] and key[pg.K_s]:
+##            pass
+##        if key[pg.K_d]:
+##            action = "Damage"
+##        else:
+##            action = "Special"
+##
+##    if direction == "fight":
+##        Zauberer.fight(Rouge)
+##    
     
     
         
