@@ -51,7 +51,7 @@ class Rouge(Kämpfer):
             if not(self.Auswahl in ["Invisible", "Damage"]):
                 if (not (self.Auswahl == "")):
                     print("Wrong Command")
-                self.Auswahl = self.get_action()
+                self.Auswahl = input("Invisible or Damage?")
                 
             if (self.Auswahl == "Special"):
                 self.invisible_flag = True
@@ -86,7 +86,7 @@ class Magier(Kämpfer):
             if not(self.Auswahl in ["Regenerate", "Damage"]):
                 if (not (self.Auswahl == "")):
                     print("Wrong Command")
-                self.Auswahl = self.get_action()
+                self.Auswahl = input("Regenerate or Damage?")
 
             if (self.Auswahl == "Special"):
                 self.healpoints = self.healpoints + 10
@@ -116,7 +116,7 @@ class Krieger(Kämpfer):
         if not(self.Auswahl in ["Block", "Damage"]):
             if (not (self.Auswahl == "")):
                 print("Wrong Command")
-            self.Auswahl = self.get_action()
+            self.Auswahl = input("Block or Damage")
         if (self.Auswahl == "Block"):
             self.block_flag = True
             print(self.name + " uses their shield.")
