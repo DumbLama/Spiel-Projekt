@@ -15,6 +15,15 @@ pg.display.set_caption('Kuhles sbiel')
 Arenapic = pg.image.load('Arena.png')
 Arenax = 0
 Arenay = 0
+Feuerballpic = pg.image.load("Kostum1.png")
+feuerballx = 0
+feuerbally = 0
+feuerball_flag = False
+Kriegerschlagpic = pg.image.load("Kostum2.png")
+Kriegerschlagx = 0
+Kriegerschlagy = 0
+schlag_flag = False
+schlag_counter = 0
 Kämpfer1pic = pg.image.load('Sprites10.png')
 Kämpfer1x = 910
 Kämpfer1y = 559
@@ -35,6 +44,10 @@ action = ""
 def_flag1 = False
 def_flag2 = False
 input_flag = False
+phase = ""
+damage_flag = False
+special_flag = False
+Schild_Flag = False
 
 
 
@@ -98,6 +111,67 @@ while True: # main game loop
             else:
                 kämpfer1_fight_flag = True
                 print("Der Kämpfer Rechte kämpft")
+
+        if kämpfer1_fight_flag:
+            if phase == "":
+                phase = "regeneration"
+            elif phase == "regeneration":
+                #kämpfer1.regenerate()
+                phase = "special"
+            elif phase == "special":
+                if True:#krieger1.genug():
+                    phase = "choice"
+                else:
+                    phase = "autoattack"
+            elif phase == "choice":
+                #auswahl treffen
+                if key[pg.K_d] and  key[pg.K_s]:
+                    pass
+                elif key[pg.K_d]:
+                    damage_flag = True
+                elif key[pg.K_s]:
+                    special_flag = True
+                if damage_flag or special_flag:
+                    phase = "animation"
+                    if damage_flag:
+                        animation = "damage"
+                    else:
+                        animation = "special"
+                
+            elif phase == "autoattack":
+                krieger1.autoattack(krieger2)
+                phase = "animation"
+                animation = "krieger1autoattack"
+            elif phase == "animation":
+                #animation
+                if direction == "":
+                    direction = "hingehen"
+                if animation == "damage":
+                    if direction == "hingehen":
+                        Kämpfer1x += -5
+                        if Kämpfer1x <=  480:
+                            direction = "schlag"
+                    elif direction == "schlag":
+                        schlag_flag = True
+                        schlag_counter += 1
+                        if schlag_counter >= 30:
+                            direction = "zurückgehen"
+                    elif direction == "zurückgehen":
+                        schlag_flag = False
+                        schlag_counter = 0
+                        Kämpfer1x += 5
+                        if Kämpfer1x >=  525:
+                            direction = ""
+                            phase = ""
+                            kämpfer1_fight_flag = False
+                            kämpfer2_fight_flag = True
+                elif animation == "special":
+                    pass
+
+                elif animation == "autoattack":
+                    pass
+                    
+            
                 
         
 
@@ -118,8 +192,14 @@ while True: # main game loop
     
         
             
-    DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
+    #DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
     DISPLAYSURF.blit(Kämpfer2pic,(Kämpfer2x, Kämpfer2y))
+    if feuerball_flag:
+        DISPLAYSURF.blit(Feuerballpic,(Feuerballx, Feuerbally))
+    if schlag_flag:
+        DISPLAYSURF.blit(Kriegerschlagpic, (Kämpfer1x, Kämpfer1y))
+    else:
+        DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
 
 
     pg.display.update()
