@@ -1,4 +1,4 @@
-
+from random import randint
 from Kämpfer import *
 from Arena import *
 
@@ -7,24 +7,34 @@ from Arena import *
 import pygame as pg
 import sys
 from pygame.locals import *
-
+superstate = "Intro"
 pg.init()
 
 DISPLAYSURF = pg.display.set_mode((1000, 700))
-pg.display.set_caption('gfgfgfufffkkf')
+pg.display.set_caption('Kuhles sbiel')
 Arenapic = pg.image.load('Arena.png')
 Arenax = 0
 Arenay = 0
 Kämpfer1pic = pg.image.load('Sprites10.png')
 Kämpfer1x = 910
 Kämpfer1y = 559
+
+kämpfer1_fight_flag = False
+
 Kämpfer2pic = pg.image.load('Sprites12.png')
 Kämpfer2x = 50
 Kämpfer2y = 567
+
+kämpfer2_fight_flag = False
+
 Arenapic = pg.transform.scale(Arenapic, (1000, 700))
 direction = "right1"
 key = pg.key.get_pressed()
 action = ""
+
+def_flag1 = False
+def_flag2 = False
+input_flag = False
 
 
 
@@ -47,48 +57,64 @@ while True: # main game loop
     key = pg.key.get_pressed()
     #key = pg.key.get_pressed()
     action = ""
-    if direction == "right1":
-        Kämpfer1x += -5
-        if Kämpfer1x <=  860:
-            direction = "down1"
-    elif direction == "down1":
-        Kämpfer1y += 3
-        Kämpfer1x += -3
-        if Kämpfer1y >= 601:
-            direction = "right2"
-    elif direction == "right2":
-        Kämpfer1x += -5
-        if Kämpfer1x <=  525:
-            direction = "left"
-
-
-    if direction == "left":
-        Kämpfer2x += 5
-        if Kämpfer2x >=  115:
-            direction = "down2"
-    elif direction == "down2":
-        Kämpfer2y += 3
-        Kämpfer2x += 3
-        if Kämpfer2y >= 601:
-            direction = "left2"
-    elif direction == "left2":
-        Kämpfer2x += 5
-        if Kämpfer2x >=  425:
-            direction = "fight"
-
     
-    if key[pg.K_d] or  key[pg.K_s]:
-        if key[pg.K_d] and key[pg.K_s]:
-            pass
-        if key[pg.K_d]:
-            action = "Damage"
-        else:
-            action = "Special"
+    if superstate == "Intro":
+    
+        if direction == "right1":
+            Kämpfer1x += -5
+            if Kämpfer1x <=  860:
+                direction = "down1"
+        elif direction == "down1":
+            Kämpfer1y += 3
+            Kämpfer1x += -3
+            if Kämpfer1y >= 601:
+                direction = "right2"
+        elif direction == "right2":
+            Kämpfer1x += -5
+            if Kämpfer1x <=  525:
+                direction = "left"
 
-    if direction == "fight":
-        Zauberer.fight(Rouge)
-    
-    
+
+        if direction == "left":
+            Kämpfer2x += 5
+            if Kämpfer2x >=  115:
+                direction = "down2"
+        elif direction == "down2":
+            Kämpfer2y += 3
+            Kämpfer2x += 3
+            if Kämpfer2y >= 601:
+                direction = "left2"
+        elif direction == "left2":
+            Kämpfer2x += 5
+            if Kämpfer2x >=  425:
+                direction = ""
+                superstate = "Fight"
+                
+    elif superstate == "Fight":
+        if not ((kämpfer1_fight_flag) or (kämpfer2_fight_flag)):
+            if randint(0, 1) == 0:
+                kämpfer1_fight_flag = True
+                print("Der Kämpfer Links kämpft")
+            else:
+                kämpfer1_fight_flag = True
+                print("Der Kämpfer Rechte kämpft")
+                
+        
+
+            
+##    if key[pg.K_d] or  key[pg.K_s]:
+##        if key[pg.K_d] and key[pg.K_s]:
+##            pass
+##        if key[pg.K_d]:
+##            action = "Damage"
+##        else:
+##            action = "Special"
+##
+##    if direction == "fight":
+##        print(action)
+##        Arena2.fight_to_death()
+##        input()
+
     
         
             
