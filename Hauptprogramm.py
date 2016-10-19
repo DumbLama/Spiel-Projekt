@@ -134,9 +134,10 @@ while True: # main game loop
                 if damage_flag or special_flag:
                     phase = "animation"
                     if damage_flag:
-                        animation = "damage"
+                        print("damage choice")
+                        animation = "damage" #soll dann "damage" sein
                     else:
-                        animation = "special"
+                        animation = "feuerball"
                 
             elif phase == "autoattack":
                 krieger1.autoattack(krieger2)
@@ -144,9 +145,11 @@ while True: # main game loop
                 animation = "krieger1autoattack"
             elif phase == "animation":
                 #animation
+                print("animation")
                 if direction == "":
                     direction = "hingehen"
                 if animation == "damage":
+                    print("damage")
                     if direction == "hingehen":
                         Kämpfer1x += -5
                         if Kämpfer1x <=  480:
@@ -165,12 +168,37 @@ while True: # main game loop
                             phase = ""
                             kämpfer1_fight_flag = False
                             kämpfer2_fight_flag = True
+
+                            damage_flag = False
                 elif animation == "special":
                     pass
 
                 elif animation == "autoattack":
                     pass
-                    
+
+                elif animation == "feuerball":
+                    print("feuerball")
+                    if direction == "hingehen":
+                        feuerballx = Kämpfer2x + 20
+                        feuerbally = Kämpfer2y + 10
+                        feuerball_flag = True
+                        direction = "fliegen"
+                    elif direction == "fliegen":
+                        feuerballx += 20
+                        if feuerballx >= Kämpfer1x:
+                            direction = "impact"
+                    elif direction == "impact":
+                        feuerball_flag = False
+                        direction = ""
+                        phase = ""
+                        special_flag = False
+                        damage_flag = False
+                        kämpfer1_fight_flag = False
+                        kämpfer2_fight_flag = True
+        if kämpfer2_fight_flag:
+            print("got here")
+            kämpfer1_fight_flag = True
+            kämpfer2_fight_flag = False
             
                 
         
@@ -192,12 +220,12 @@ while True: # main game loop
     
         
             
-    #DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
+    #sdDISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
     DISPLAYSURF.blit(Kämpfer2pic,(Kämpfer2x, Kämpfer2y))
     if feuerball_flag:
-        DISPLAYSURF.blit(Feuerballpic,(Feuerballx, Feuerbally))
+        DISPLAYSURF.blit(Feuerballpic,(feuerballx, feuerbally))
     if schlag_flag:
-        DISPLAYSURF.blit(Kriegerschlagpic, (Kämpfer1x, Kämpfer1y))
+        DISPLAYSURF.blit(Kriegerschlagpic, (Kämpfer1x-23, Kämpfer1y))
     else:
         DISPLAYSURF.blit(Kämpfer1pic,(Kämpfer1x, Kämpfer1y))
 
